@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prueba de Creación de Cartas</title>
+  <link rel="stylesheet" href="./Styles/tarjeta.css">
+</head>
+
+<body>
+
+  <div class="visa-card">
+    <div class="logoContainer">
+      <h1>NetCard</h1>
+      
+    </div>
+    <div class="number-container">
+      <label class="input-label" for="cardNumber">NÚMERO DE TARJETA</label>
+      <input class="inputstyle" id="cardNumber" placeholder="XXXX XXXX XXXX XXXX" name="cardNumber" type="text" />
+    </div>
+
+    <div class="name-date-cvv-container">
+      <div class="name-wrapper">
+        <label class="input-label" for="holderName">TARJETA DIGITAL</label>
+        <input class="inputstyle" id="holderName" placeholder="NAME" type="text" />
+      </div>
+
+      <div class="expiry-wrapper">
+        <label class="input-label" for="expiry">VALIDA HASTA</label>
+        <input class="inputstyle" id="expiry" placeholder="MM/YY" type="text" />
+      </div>
+      <div class="cvv-wrapper">
+        <label class="input-label" for="cvv">CVV</label>
+        <input class="inputstyle" placeholder="***" maxlength="3" id="cvv" type="password" />
+      </div>
+    </div>
+  </div>
+  
+
+
+</body>
+
+</html>

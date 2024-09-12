@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beneficios</title>
+  <link rel="stylesheet" href="{% static "beneficios_style.css" %}">
+
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="container">
+      
+      <input type="checkbox" id="menu-toggle">
+      
+      <label for="menu-toggle" class="hamburger">&#9776;</label>
+      <div class="logo">
+        <a class="reward-btn" href="{% url 'beneficios_views'%}">Regresar</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <main>
+    <section class="rewards-section">
+      <!-- Título de la sección -->
+      {% if beneficio.Imagen %}
+      <img src="{{ beneficio.Imagen.url }}" style="width:210px;" alt="Imagen de la recompensa" id="reward-icon" class="reward-icon">
+      {% else %}
+      <img src="{% static 'media/NotImagen.jpg' %}" style="width:200px;" alt="Imagen por defecto" class="reward-icon">
+      {% endif %}
+      <!-- Contenedor de las recompensas -->
+      <div class="rewards-container">
+        <div>
+          <h3>Empresa que ofrece el beneficio:</h3>
+          <p>{{ beneficio.Nombre }}</p>
+          
+          <h3>Contacto</h3>
+          <p>{{ beneficio.Telefono }}</p>
+          <h3>Sitio oficial</h3>
+          <p>{{ beneficio.Web }}</p>
+
+          <h3>Beneficio que ofrece</h3>
+          <p>{{ beneficio.titulo_beneficio }}</p>
+          <h3>Descripción</h3>
+          <p>{{ beneficio.descripcion_beneficio }}</p>
+          <h3>Vigencia del</h3>
+          <p>{{ beneficio.inicio }} al {{ beneficio.fin }}</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <h3>&copy; 2023 Tu empresa</h3>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 20 20">
+      <path fill="currentColor"
+        d="M17 1H3c-1.1 0-2 .9-2 2v14c0 1.101.9 2 2 2h7v-7H8V9.525h2v-2.05c0-2.164 1.212-3.684 3.766-3.684l1.803.002v2.605h-1.197c-.994 0-1.372.746-1.372 1.438v1.69h2.568L15 12h-2v7h4c1.1 0 2-.899 2-2V3c0-1.1-.9-2-2-2" />
+    </svg>
+  </footer>
+
+</body>
+
+
+</html>

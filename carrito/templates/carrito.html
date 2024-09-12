@@ -1,0 +1,93 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito</title>
+    <link rel="stylesheet" href="{% static "carrito.css" %}">
+</head>
+<body>
+    <!--Encabezado del menu-->
+    <nav class="navbar">
+        <div class="container">
+          <div class="logo">Logo</div>
+          <input type="checkbox" id="menu-toggle">
+          <label for="menu-toggle" class="hamburger">&#9776;</label>
+          <ul class="nav-links">
+            <li><a href="{% url 'tienda_views' %}">Tienda</a></li>
+            <li><a href="{% url 'premios_views' %}">Premios</a></li>
+            <li><a href="{% url 'beneficios_views' %}">Beneficios</a></li>
+            <li><a href="{% url 'principal_views' %}">Ver Tarjeta Digital</a></li>
+            <li><a id="sesion" href="{% url 'cerrar' %}">Cerra/iniciar sesión</a></li>
+          </ul>
+        </div>
+      </nav>
+    
+      <!--Contenido(Cuerpo)-->
+      <h2>Lista de productos</h2>
+
+        <div class="accordion-container">
+            <!-- Acordeon 2 -->
+            
+            {% for p in productos %}
+            <div class="accordion-item">
+                <input type="checkbox" id="accordion1">
+                <label class="accordion-header" for="accordion1">
+                {{p.producto}}
+                </label>
+                <div class="accordion-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Sub total</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Agregar las filas de la tabla -->
+                            <tr>
+                                <td>{{p.producto}}</td>
+                                <td>{{p.cantidad}}</td>
+                                <td>{{p.precio}}</td>
+                                <td><a class="eliminar" id="{{ p.id }}" href="{% url 'eliminar' p.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-square-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 2h-14a3 3 0 0 0 -3 3v14a3 3 0 0 0 3 3h14a3 3 0 0 0 3 -3v-14a3 3 0 0 0 -3 -3zm-9.387 6.21l.094 .083l2.293 2.292l2.293 -2.292a1 1 0 0 1 1.497 1.32l-.083 .094l-2.292 2.293l2.292 2.293a1 1 0 0 1 -1.32 1.497l-.094 -.083l-2.293 -2.292l-2.293 2.292a1 1 0 0 1 -1.497 -1.32l.083 -.094l2.292 -2.293l-2.292 -2.293a1 1 0 0 1 1.32 -1.497z"/></svg></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="enviar">
+                <table class="total">
+                    <thead>
+                        <tr>
+                            <th>Total de tu compra</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Agregar las filas de la tabla -->
+                        <tr>
+                            <td class="total">${{ total }} pesos MXN</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="enviar">
+                <a class="reward-btn" id="{{ pagar }}" href="{% url 'pagar_view' pagar %}">Pagar</a>
+            </div>
+
+  <!--Pie de página-->  
+<footer>
+    <p>&copy; 2023 Tu empresa</p>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 20 20">
+        <path fill="currentColor"
+        d="M17 1H3c-1.1 0-2 .9-2 2v14c0 1.101.9 2 2 2h7v-7H8V9.525h2v-2.05c0-2.164 1.212-3.684 3.766-3.684l1.803.002v2.605h-1.197c-.994 0-1.372.746-1.372 1.438v1.69h2.568L15 12h-2v7h4c1.1 0 2-.899 2-2V3c0-1.1-.9-2-2-2" />
+    </svg>
+</footer>
+
+
+</body>
+</html>

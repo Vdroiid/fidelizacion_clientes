@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Principal</title>
+  <link rel="stylesheet" href="{% static "iniciousuario.css" %}">
+  <link rel="stylesheet" href="{% static "tarjeta.css" %}">
+  <link rel="stylesheet" href="{% static "style_oscuro.css" %}">
+
+</head>
+
+<body>
+  <!-- Header con menú -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">Logo</div>
+      <input type="checkbox" id="menu-toggle">
+      <label for="menu-toggle" class="hamburger">&#9776;</label>
+      <ul class="nav-links">
+        <li><a href="{% url 'tienda_views' %}">Tienda</a></li>
+        <li><a href="{% url 'premios_views' %}">Premios</a></li>
+        <li><a href="{% url 'beneficios_views' %}">Beneficios</a></li>
+        <li><a href="#tarjeta-digital">Ver Tarjeta Digital</a></li>
+        <li><a id="sesion" href="{% url 'cerrar' %}">Cerra/iniciar sesión</a></li>
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider"></span>
+        </label>
+
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Contenido principal -->
+  <main>
+
+    <!-- Sección de puntos -->
+    <section id="cardScore">
+       <!--Sección donde va el nombre del usuario-->
+      <section id="nomnbre-usuario">
+        <h3>Hola,</h3>
+        {% for clientes in UsuarioPersonalizado %}
+        <h3><p>{{ clientes.username }}</h3>
+        {% endfor %}
+        <p>Sea <strong>bienvenid@</strong></p>
+        <!-- Puntos-->
+        <h4>Tus puntos actualmente:</h4>
+        {% for clientes in UsuarioPersonalizado %}
+        <div class="counter"><p>{{ clientes.puntos }}</p></div>
+        {% endfor %}
+
+      </section>
+      <section id="tarjeta-digital">
+        
+        
+  <div class="visa-card">
+    <div class="logoContainer">
+      <h1>NetCard</h1>
+    </div>
+    <div class="number-container">
+      {% for t in tarjeta %}
+      <label class="input-label" for="cardNumber">NÚMERO DE TARJETA</label>
+      <input class="inputstyle" id="cardNumber" placeholder="{{ t.tarjeta }}" name="cardNumber" type="text" disabled />
+      {% endfor %}
+    </div>
+
+    <div class="name-date-cvv-container">
+      <div class="name-wrapper">
+        {% for t in tarjeta %}
+        <label class="input-label" for="holderName">TARJETA DIGITAL</label>
+        <input class="inputstyle" id="holderName" placeholder="{{ t.usuario }}" type="text" disabled />
+        {% endfor %}
+      </div>
+
+      <div class="expiry-wrapper">
+        {% for t in tarjeta %}
+        <label class="input-label" for="expiry">EXPIRA</label>
+        <input class="inputstyle" id="expiry" placeholder="{{ t.fecha }}" type="text" disabled />
+        {% endfor %}
+
+      </div>
+      <div class="cvv-wrapper">
+        {% for t in tarjeta %}
+        <label class="input-label" for="cvv">CVV</label>
+        <input class="inputstyle" placeholder="{{ t.cvc }}" maxlength="3" id="cvv" type="password" disabled/>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+        
+      </section>
+      
+    </section>
+    <!--Sección de alerta-->
+    <section style="display:{{ activar }}; color:white; justify-content: center;">
+      <div style="display:{{ activar }};" class="box slide-top">{{ mensaje }}</div>
+    </section>
+    
+    <!-- Sección de premios -->
+    <!-- Contenedor de la sección de recompensas -->
+    <section class="rewards-section">
+      
+      <!-- Título de la sección -->
+      <h2 class="rewards-title">Premios</h2>
+      <!-- Contenedor de las recompensas -->
+      
+
+      <div class="rewards-container">
+    
+        {% for premio in premios_res %}
+       
+        <!-- Recompensas-->
+        <div class="reward">
+          <h3 class="reward-title">{{ premio.Nombre_Premio }}</h3>
+          {% if premio.Imagen %}
+          <img src="{{ premio.Imagen.url }}" style="width:208px; height:220px" alt="Imagen de la recompensa" class="reward-icon">
+          {% else %}
+          <img src="{% static 'media/NotImagen.jpg' %}" style="width:200px;" alt="Imagen por defecto" class="reward-icon">
+          {% endif %}
+          <p class="reward-desc">Necesitas: <strong>{{ premio.Valor }}</strong> puntos</p>
+          
+          <a class="reward-btn" id="{{ premio.id }}" href="{% url 'canjear' premio.id %}">Canjear</a>
+          
+        </div>
+        
+        {% endfor %}
+      </div>
+      
+      <!-- Botón de ver más recompensas -->
+       
+      <center><a style="width: 300px;" class="reward-btn" href="{% url 'premios_views' %}">Explora más premios</a></center>
+    </section>
+
+    <!-- Sección de beneficios -->
+    <section id="beneficios">
+      <h2>Beneficios</h2>
+      <p>Por cada 100 pesos de compra que realice, se le bonificara con 5pts. Mientras más puntos obtenga más
+        probabilidad de reclamar los premios.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Tu empresa</p>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 20 20">
+      <path fill="currentColor"
+        d="M17 1H3c-1.1 0-2 .9-2 2v14c0 1.101.9 2 2 2h7v-7H8V9.525h2v-2.05c0-2.164 1.212-3.684 3.766-3.684l1.803.002v2.605h-1.197c-.994 0-1.372.746-1.372 1.438v1.69h2.568L15 12h-2v7h4c1.1 0 2-.899 2-2V3c0-1.1-.9-2-2-2" />
+    </svg>
+  </footer>
+  <script>
+    // Verificar si el modo oscuro está activado en el almacenamiento local
+    if (localStorage.getItem('dark-mode') === 'true') {
+        document.body.classList.add('dark-mode');
+    }
+
+    // Agregar un listener al botón para cambiar el modo
+    document.getElementById('toggle-dark-mode').addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        // Guardar la preferencia en el almacenamiento local
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        localStorage.setItem('dark-mode', isDarkMode);
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,294 @@
+@keyframes moving {
+    50% {
+        width: 100%;
+    }
+  
+    100% {
+        width: 0;
+        right: 0;
+        left: unset;
+    }
+  }
+  
+    /* Estilos generales */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-image: linear-gradient(to bottom, #fee5f0, #fe68a7);
+    overflow-x: hidden;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  .navbar {
+    background-color: #55021a;
+    color: #fff;
+  }
+  
+  .logo {
+    font-size: 1.5em;
+  }
+  
+  .nav-links {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .nav-links li {
+    padding: 0 10px;
+  }
+  
+  .nav-links a {
+    color: #FECDE2;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: #FE7BB2;
+  }
+  
+  .hamburger {
+    display: none;
+    font-size: 1.5em;
+    cursor: pointer;
+  }
+  
+  input[type="checkbox" i] {
+    display: none;
+    background-color: initial;
+    cursor: default;
+    appearance: auto;
+    box-sizing: border-box;
+    margin: 3px 3px 3px 4px;
+    padding: initial;
+    border: initial;
+  }
+  
+  /* Estilos responsivos */
+  @media screen and (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        z-index: 1; /* Asegura que el menú esté sobre otros contenidos */
+    }
+  
+    .nav-links.active {
+        display: flex;
+    }
+  
+    .nav-links li {
+        text-align: center;
+        padding: 10px 0;
+    }
+  
+    /* Estilos para mostrar el icono de menú en dispositivos móviles */
+    #menu-toggle:checked + .hamburger {
+        color: #fff;
+    }
+  
+    #menu-toggle:checked ~ .nav-links {
+        display: flex;
+    }
+  
+    .hamburger {
+        display: block;
+    }
+  }
+  
+  
+  .rewards-section {
+    background-color: #ffffff;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .rewards-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .rewards-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .reward {
+    width: 250px;
+    margin: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+  
+  .reward-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+  
+  .reward-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .reward-desc {
+    font-size: 14px;
+    color: #ec0808;
+    margin-bottom: 20px;
+  }
+  
+  .reward-btn {
+    background-color: #55021A;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    text-decoration-line: none;
+  }
+  
+  .reward-btn:hover {
+    background-color: #FE7BB2;
+  }
+  
+  .more-rewards-btn {
+    background-color: #55021A;
+    display: grid;
+    align-items: center;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  .more-rewards-btn:hover {
+    background-color: #55021A;
+  }
+  
+  #cardScore {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .counter{
+    text-align: start;
+    font-size: 50px;
+  }
+  
+  
+  /* Estilos para tarjeta digital */
+  .tarjeta-digital {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+  }
+  
+  .tarjeta-digital h3 {
+    margin-top: 0;
+  }
+  
+  .tarjeta-digital p {
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para secciones */
+  section {
+    padding: 20px;
+  }
+  
+  h2 {
+    margin-top: 0;
+  }
+  
+  /* Estilos para premios y beneficios */
+  #premios ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #premios li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  #premios li:last-child {
+    border-bottom: none;
+  }
+  
+  #beneficios p {
+    margin-bottom: 20px;
+  }
+  
+  footer {
+    position: static;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background-color: #55021a;
+    color: #fff;
+    text-align: center;
+  }
+
+  .beneficio{
+    width: 80%;
+  }
+  .nav-links li #sesion {
+    padding: 0 10px;
+    color: #FECDE3;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .nav-links li #sesion:hover {
+    color: #FECCE3;
+    background:#E91F64;
+    border-radius: 5px;
+    margin: 2px;
+    border-color: #ffffff;
+    padding: 4px;
+  
+  }
+  

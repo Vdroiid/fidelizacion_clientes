@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premios</title>
+  <link rel="stylesheet" href="{% static "estilos_premioss.css" %}">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="container">
+      
+      <input type="checkbox" id="menu-toggle">
+      
+      <label for="menu-toggle" class="hamburger">&#9776;</label>
+      <div class="logo">Logo</div>
+      <ul class="nav-links">
+        
+        <li><a href="{% url 'tienda_views' %}">Tienda</a></li>
+        <li><a href="{% url 'beneficios_views'%}">Beneficios</a></li>
+        <li><a href="{% url 'principal_views'%}">Cuenta</a></li>
+        <li><a id="sesion" href="{% url 'cerrar' %}">Cerra/iniciar sesión</a></li>
+        
+      </ul>
+    </div>
+  </nav>
+  
+    <!--Sección de alerta-->
+    <div style="display:{{ activar }}; color:white; justify-content: center;">
+      <div style="display:{{ activar }};" class="box slide-top">{{ mensaje }}</div>
+    </div>
+
+  <main>
+    <section class="rewards-section">
+      <!-- Título de la sección -->
+      <h2 class="rewards-title">Premios</h2>
+      <!-- Contenedor de las recompensas -->
+      <div class="rewards-container">
+
+        {% for premio in premios %}
+        <!-- Recompensas-->
+        <div class="reward">
+          <h3 class="reward-title">{{ premio.Nombre_Premio }}</h3>
+          {% if premio.Imagen %}
+          <img src="{{ premio.Imagen.url }}" style="width:210px; height:220px" alt="Imagen de la recompensa" class="reward-icon">
+          {% else %}
+          <img src="{% static 'media/NotImagen.jpg' %}" style="width:200px;" alt="Imagen por defecto" class="reward-icon">
+          {% endif %}
+          <p class="reward-desc">Necesitas: <strong>{{ premio.Valor }}</strong> puntos</p>
+
+          <a class="reward-btn" id="{{ premio.id }}" href="{% url 'canjear_view' premio.id %}">Canjear</a>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Tu empresa</p>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 20 20">
+      <path fill="currentColor"
+        d="M17 1H3c-1.1 0-2 .9-2 2v14c0 1.101.9 2 2 2h7v-7H8V9.525h2v-2.05c0-2.164 1.212-3.684 3.766-3.684l1.803.002v2.605h-1.197c-.994 0-1.372.746-1.372 1.438v1.69h2.568L15 12h-2v7h4c1.1 0 2-.899 2-2V3c0-1.1-.9-2-2-2" />
+    </svg>
+  </footer>
+
+</body>
+
+</html>
